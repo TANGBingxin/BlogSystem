@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3.3.4/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/axios@1.6.0/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body style="height: 100%;">
+    <div id="indexPage">
+        <div class="top">
+            <div class="logo">
+                <span>Bingxin TANG</span>
+            </div>
+            <div class="top-menu">
+                <ul>
+                    <li>Home</li>
+                    <li>Like</li>
+                </ul>
+            </div>
+            <div class="login-pad">
+                <div v-if="userInfo == null">
+                    <label>
+                        <span>Username:</span>
+                        <input type="text" v-model="userName" id="">
+                    </label>
+                    <label>
+                        <span>Password:</span>
+                        <input type="text" v-model="password" name="" id="">
+                    </label>
+                    <label>
+                        <span>Verification code:</span>
+                        <input type="text" name="" id="">
+                        <b>5656</b>
+                    </label>
+                    <button @click.prevent="onLogin">Login</button>
+                    <button>Sign up</button>
+                </div>
+                <div v-else>
+                    Welcome: {{userInfo.userName}}
+                    <button @click="onLogout">Log out</button>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <div class="center-left">
+
+            </div>
+            <div class="center-right">
+                <div class="nav">
+                    <a href="">Home</a>
+                    ->
+                    <a href="">Blog list</a>
+                </div>
+                <div class="news-pad">
+                    <div class="news-item" v-for="news in newsInfo">
+                        <p class="news-name">{{news.title}}</p>
+                        <p class="news-key">Keyword:{{news.key}}</p>
+                        <p class="news-detail">
+                            <a href="">Read more</a>&nbsp;
+                            <span>Clicks: [{{news.hit}}]</span>&nbsp;
+                            <span>Comments: [{{news.replyCount}}]</span>&nbsp;
+                            <span>Publish Time: [{{tranTime(news.publishTime)}}]</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom"></div>
+    </div>
+</body>
+<script>
+    const { createApp, ref, onMounted } = Vue;
+
+    const app = createApp({
+        setup()
+        {
+            const userInfo = ref(null);
+            const userName = ref("");
+            const password = ref("");
+            const newsInfo = ref([]);
+
+            //newsInfo and userInfo need to store in localStorage to avoid refresh page
+            const fetchNews = async () =>
+            {
+                try
+                {
+                    const res = await axios.get("http://localhost:5138/api/News");
+                    if (JSON.stringify(res.data) !== JSON.stringify(newsInfo.value))
+                    {
+                        newsInfo.value = res.data;
+                        localStorage.setItem('newsInfo', JSON.stringify(res.data));
+                    }
+                } catch (error)
+                {
+                    console.error('Error fetching news:', error);
+                }
+            };
+
+            const tranTime = (time) =>
+            {
+                return time.replace("T", " ");
+            }
+
+            onMounted(async () =>
+            {
+                const savedUserInfo = localStorage.getItem('userInfo');
+                if (savedUserInfo)
+                {
+                    userInfo.value = JSON.parse(savedUserInfo);
+                }
+
+                const savedNewsInfo = localStorage.getItem('newsInfo');
+                if (savedNewsInfo)
+                {
+                    newsInfo.value = JSON.parse(savedNewsInfo);
+                    isInitialized.value = true;
+                } else
+                {
+                    await fetchNews();
+                }
+            });
+
+            const onLogin = async () =>
+            {
+                try
+                {
+                    let name = userName.value;
+                    let pwd = password.value;
+                    const res = await axios.get(`http://localhost:5138/api/Login?userName=${name}&password=${pwd}`);
+
+                    if (res.status === 200 && res.data)
+                    {
+                        userName.value = "";
+                        password.value = "";
+                        userInfo.value = res.data;
+                        localStorage.setItem('userInfo', JSON.stringify(res.data));
+                    }
+                } catch (error)
+                {
+                    console.error('Login failed:', error);
+                    alert('Login failed. Please try again.');
+                }
+            }
+
+            const onLogout = () =>
+            {
+                userInfo.value = null;
+                localStorage.removeItem('userInfo');
+            }
+
+            return {
+                userName,
+                password,
+                userInfo,
+                onLogin,
+                onLogout,
+                newsInfo,
+                tranTime
+            };
+        }
+    })
+    app.mount("#indexPage");
+</script>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    #indexPage {
+        height: 100%;
+    }
+
+    #indexPage .top {
+        background-color: #e0e5df;
+        height: 200px;
+        position: relative;
+    }
+
+    #indexPage .top .top-menu {
+        float: right;
+    }
+
+    #indexPage .top .top-menu li {
+        float: left;
+        list-style: none;
+        margin-right: 10px;
+    }
+
+    #indexPage .top .login-pad {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 40px;
+        padding: 10px;
+        padding-bottom: 6px;
+        background-color: #E8EFE8;
+        border-radius: 6px 0 0 6;
+    }
+
+    #indexPage .top .login-pad label {
+        margin-right: 10px;
+    }
+
+    #indexPage .top .login-pad b {
+        background-color: #D0DCD0;
+        padding: 3px;
+    }
+
+    #indexPage .center {
+        display: flex;
+        height: 100%;
+    }
+
+    #indexPage .center .center-left {
+        height: 100%;
+        width: 356px;
+        border-right: 1px solid #b1b5a1;
+    }
+
+    #indexPage .center .center-right {
+        flex: 1;
+    }
+
+    #indexPage .center .center-right .nav {
+        background-color: #EBF0F5;
+        height: 30px;
+        width: 100%;
+        line-height: 30px;
+        padding-left: 10px;
+    }
+
+    #indexPage .center .center-right .news-pad .news-item p {
+        text-align: center;
+    }
+
+    #indexPage .center .center-right .news-pad .news-item .news-name {
+        line-height: 30px;
+        height: 30px;
+        background-color: #E5EAF0;
+        font-weight: 600;
+    }
+
+    #indexPage .center .center-right .news-pad .news-item .news-key {
+        background-color: #DCE3EB;
+        font-weight: 600;
+    }
+
+    #indexPage .center .center-right .news-pad .news-item .news-detail {
+        background-color: #D5DEE7;
+    }
+</style>
+
+</html>

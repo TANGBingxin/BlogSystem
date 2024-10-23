@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3.5.12/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="registPage">
+        <div class="regist-pad">
+            <h2>Blog Regist Information</h2>
+            <p><label><span>Name</span><input type="text" v-model="userName"></input></label></p>
+            <p><label><button>Check name</button></label></p>
+            <p><label><span>Password</span><input type="text"></input></label></p>
+            <p><label><span>Confirm Password</span><input type="text" v-model="password"></input></label></p>
+            <p><label><span>Sex</span><select v-model="sex">
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="DK">Prefer not to say</option>
+                    </select></label></p>
+            <p><label><span>Birthday</span><input type="date" v-model="birthday"></input></label></p>
+            <p><label><span>Security Question</span><input type="text" v-model="passwordQuestion"></input></label></p>
+            <p><label><span>Security Answer</span><input type="text" v-model="passwordAnswer"></input></label></p>
+            <p><label><span>E-mail</span><input type="text" v-model="email"></input></label></p>
+            <p><label><span>Phone Number</span><input type="text" v-model="phoneNumber"></input></label></p>
+            <p><button @click="onRegist">Confirm</button><button @click="onCancel">Annuler</button></p>
+        </div>
+    </div>
+</body>
+<script>
+    const { createApp, reactive, toRefs, ref } = Vue;
+    const app = createApp({
+        setup()
+        {
+            const registInfo = reactive({
+                userName: "",
+                password: "",
+                sex: "",
+                birthday: "",
+                passwordQuestion: "",
+                passwordAnswer: "",
+                email: "",
+                phoneNumber: ""
+            });
+            const onRegist = () =>
+            {
+
+                axios.post("http://localhost:5138/api/user", registInfo)
+            }
+            return {
+                ...toRefs(registInfo),
+                onRegist
+            };
+        }
+    })
+    app.mount("#registPage")
+
+</script>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .regist-pad {
+        height: 540px;
+        width: 450px;
+        border: 1px solid #000;
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    .regist-pad h2 {
+        text-align: center;
+        border-top: 20px solid rgb(230, 230, 230);
+    }
+
+    .regist-pad p {
+        margin: 10px 10px 20px;
+    }
+
+    .regist-pad p span {
+        display: inline-block;
+        width: 150px;
+        text-align: center;
+    }
+
+    .regist-pad p button {
+        margin-left: 150px;
+    }
+</style>
+
+</html>

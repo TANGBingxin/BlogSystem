@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8C390D63-A153-46C5-BA77-6C8FE261ACE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSystem.Web", "src\BlogSystem.Web\BlogSystem.Web.csproj", "{36EE0C8F-892F-4506-A1C3-552CF249C211}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSystem.Domain", "src\BlogSystem.Domain\BlogSystem.Domain.csproj", "{933D023E-B53F-44B0-B5DC-DBF9446DCAF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSystem.EntityFrameworkCore", "src\BlogSystem.EntityFrameworkCore\BlogSystem.EntityFrameworkCore.csproj", "{45853AD6-9B17-4CF1-B6CE-90D04B6CFA27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSystem.Ability", "src\BlogSystem.Ability\BlogSystem.Ability.csproj", "{A8AAFC00-68E6-4301-8E9B-93CE17D6FD59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSystem.Ability.Docking", "src\BlogSystem.Ability.Docking\BlogSystem.Ability.Docking.csproj", "{6E18E7E3-8FF5-40F1-BEB3-666DE7EFED5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSystem.Http.Client", "src\BlogSystem.Http.Client\BlogSystem.Http.Client.csproj", "{C1BF3C0E-3A06-4D02-88D3-82D0795D9242}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36EE0C8F-892F-4506-A1C3-552CF249C211}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36EE0C8F-892F-4506-A1C3-552CF249C211}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36EE0C8F-892F-4506-A1C3-552CF249C211}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36EE0C8F-892F-4506-A1C3-552CF249C211}.Release|Any CPU.Build.0 = Release|Any CPU
+		{933D023E-B53F-44B0-B5DC-DBF9446DCAF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{933D023E-B53F-44B0-B5DC-DBF9446DCAF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{933D023E-B53F-44B0-B5DC-DBF9446DCAF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{933D023E-B53F-44B0-B5DC-DBF9446DCAF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45853AD6-9B17-4CF1-B6CE-90D04B6CFA27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45853AD6-9B17-4CF1-B6CE-90D04B6CFA27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45853AD6-9B17-4CF1-B6CE-90D04B6CFA27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45853AD6-9B17-4CF1-B6CE-90D04B6CFA27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8AAFC00-68E6-4301-8E9B-93CE17D6FD59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8AAFC00-68E6-4301-8E9B-93CE17D6FD59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8AAFC00-68E6-4301-8E9B-93CE17D6FD59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8AAFC00-68E6-4301-8E9B-93CE17D6FD59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E18E7E3-8FF5-40F1-BEB3-666DE7EFED5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E18E7E3-8FF5-40F1-BEB3-666DE7EFED5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E18E7E3-8FF5-40F1-BEB3-666DE7EFED5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E18E7E3-8FF5-40F1-BEB3-666DE7EFED5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1BF3C0E-3A06-4D02-88D3-82D0795D9242}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1BF3C0E-3A06-4D02-88D3-82D0795D9242}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1BF3C0E-3A06-4D02-88D3-82D0795D9242}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1BF3C0E-3A06-4D02-88D3-82D0795D9242}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{36EE0C8F-892F-4506-A1C3-552CF249C211} = {8C390D63-A153-46C5-BA77-6C8FE261ACE1}
+		{933D023E-B53F-44B0-B5DC-DBF9446DCAF7} = {8C390D63-A153-46C5-BA77-6C8FE261ACE1}
+		{45853AD6-9B17-4CF1-B6CE-90D04B6CFA27} = {8C390D63-A153-46C5-BA77-6C8FE261ACE1}
+		{A8AAFC00-68E6-4301-8E9B-93CE17D6FD59} = {8C390D63-A153-46C5-BA77-6C8FE261ACE1}
+		{6E18E7E3-8FF5-40F1-BEB3-666DE7EFED5E} = {8C390D63-A153-46C5-BA77-6C8FE261ACE1}
+		{C1BF3C0E-3A06-4D02-88D3-82D0795D9242} = {8C390D63-A153-46C5-BA77-6C8FE261ACE1}
+	EndGlobalSection
+EndGlobal
